@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>328786548146-l8p6fpjo83r3d9mkekersn17cmoigtbe.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.328786548146-l8p6fpjo83r3d9mkekersn17cmoigtbe</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>328786548146-7k3i1i0sfg77iu3c8jtppta7cjatfetq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCqGYeRPFWBv5rgmggZNWnklq3Cjhb0Vu4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>328786548146</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.silverbird.staff.app</string>
+	<key>PROJECT_ID</key>
+	<string>silverbird-staff</string>
+	<key>STORAGE_BUCKET</key>
+	<string>silverbird-staff.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:328786548146:ios:76f3662a9d3f01e3ce40ab</string>
+	<key>DATABASE_URL</key>
+	<string>https://silverbird-staff.firebaseio.com</string>
+</dict>
+</plist>
