@@ -72,3 +72,30 @@ export const GetClientsNextPage = async (BusinessId, offset, response, error) =>
     }
 };
 
+export const createNewClient = async (clientInfo) => {
+    const AuthHeader = await authHeader();
+
+    const requestOptions = {
+        method: 'POST',
+        headers: AuthHeader,
+        credentials: 'include',
+        body:JSON.stringify(clientInfo)
+    };
+        var queryParams = "users";
+    return fetch(apiPath +
+        queryParams, requestOptions).then((response) => {
+        if (response.status == 401 || response.status == 403) {
+            AsyncStorage.clear();
+            RNRestart.Restart();
+        } else return response.json()
+    })
+        .catch((error) => {
+            if (error.message === 'Timeout' || error.message === 'Network request failed') {
+                return Promise.reject(error.message);
+            } else {
+                console.log("dfaddasdfadsf", error);
+                throw error;
+            }
+
+        })
+}

@@ -9,10 +9,13 @@ import {
 } from 'react-native';
 import styles from './styles';
 import {GetSearchClient} from '../../Redux/SagaActions/AppoinmentsSagaAction.js';
-import CusIconDesign from '../../Assets/Icon/IconAntDesign';
+import Modal from 'react-native-modal'
 import {helperFunctions} from '../../_helpers';
+import CreateClient from "./createClient";
+
 const search = props => {
   const [SearchText, setSearchText] = useState();
+  const [visibility, setVisibility] = useState(false);
   const setSearchValue = text => {
     setSearchText(text);
   };
@@ -27,81 +30,36 @@ const search = props => {
   };
 
   return (
-    <View style={{...styles.mainContainer}}>
+   <><View style={{...styles.mainContainer}}>
       {/* -------------search box--------------- */}
-      <View style={styles.backImg}>
-        <View style={styles.firstRow}>
-          <View style={styles.yellowCard}>
-            {/* <CusIconDesign
-              IconFrom="AntDesign"
-              name="search1"
-              textAlign="center"
-              color='#0E1317'
-              size={24}
-            /> */}
-            <Image
-              style={styles.searchIcon}
-              source={require('../../Assets/clients/search.png')}
-            />
+      <View style={{flexDirection:'row',alignItems:'center'}}>
+        <View style={styles.backImg}>
+
+          <TextInput
+              style={{flex: 4, paddingLeft: 10, color: '#000',paddingVertical: 15}}
+              value={SearchText}
+              onChangeText={val => setSearchValue(val)}
+          />
+          <View style={styles.secondRow}>
+            <TouchableOpacity onPress={() => getClientFromSerch()}>
+              <Image
+                  style={styles.searchIcon}
+                  source={require('../../Assets/clients/search.png')}
+              />
+            </TouchableOpacity>
           </View>
         </View>
-        <TextInput
-          style={{flex: 3, paddingLeft: 10, color: '#000'}}
-          value={SearchText}
-          onChangeText={val => setSearchValue(val)}
-        />
-        <View style={styles.secondRow}>
-          <TouchableOpacity onPress={() => getClientFromSerch()}>
-            <Image
-              style={styles.searchIcon}
-              source={require('../../Assets/clients/search.png')}
-            />
-          </TouchableOpacity>
+
+        <View style={{marginLeft: 15}}>
+          <TouchableOpacity onPress={()=>setVisibility(true)}><Text style={{...helperFunctions.themeColor()}}>Add New</Text></TouchableOpacity>
         </View>
       </View>
     </View>
+
+     <Modal style={{margin: 0}} isVisible={visibility}>
+         <CreateClient hideModal={()=>setVisibility(false)}/>
+     </Modal>
+     </>
   );
 };
-
 export default search;
-
-// export default class search extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       searchVal: '',
-//     };
-//   }
-//   render() {
-//     return (
-//       <View style={styles.mainContainer}>
-//         {/* -------------search box--------------- */}
-//         <ImageBackground
-//           source={require('../../Assets/clients/searchBackground.png')}
-//           style={styles.backImg}>
-//           <View style={styles.firstRow}>
-//             <ImageBackground
-//               source={require('../../Assets/clients/yellow.png')}
-//               style={styles.yellowCard}>
-//               <Image
-//                 style={styles.searchIcon}
-//                 source={require('../../Assets/clients/search.png')}
-//               />
-//             </ImageBackground>
-//             <TextInput
-//               style={{ height: 49, width: '80%' }}
-//               value={this.state.searchVal}
-//               onChangeText={val => this.setState({ searchVal: val })}
-//             />
-//           </View>
-//           <View style={styles.secondRow}>
-//             <Image
-//               style={styles.searchIcon}
-//               source={require('../../Assets/clients/search.png')}
-//             />
-//           </View>
-//         </ImageBackground>
-//       </View>
-//     );
-//   }
-// }
