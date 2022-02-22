@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, {useState} from 'react';
-import { View, Text, SafeAreaView, StatusBar } from 'react-native';
+import {View, Text, SafeAreaView, StatusBar, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { Body,Left,Container, Header, Content, Form, Item, Input, Label,Title,Button,Icon,Right,Picker } from 'native-base';
 import {TextInputMask} from 'react-native-masked-text'
 import MaskedInput from "../MaskedText/maskedInput";
@@ -28,12 +28,16 @@ const CreateClient = (props) => {
         referral_code:'SH2O'
 
     })
+    const [loading, setLoading] = useState(false)
+    const [error,setError] = useState({})
     const onValueChange=(item)=>setSelected(item)
     const _changeText=(text,name)=>{
         setClient({...client,[name]:text})
     }
 
-    const submitForm=async ()=>{
+    const submitForm = async ()=>{
+        alert()
+        setLoading(true)
 
         let userInfo = JSON.parse(await AsyncStorage.getItem('User@Data'));
 
@@ -56,12 +60,39 @@ const CreateClient = (props) => {
             }
         }
 
-        await createNewClient(newUser).then(response=>{
-            alert(JSON.stringify(response))
-        }).catch(error=>{
-            console.log(error)
-        })
+        const error = checkValidation()
+
+        // await createNewClient(newUser).then(response=>{
+        // }).catch(error=>{
+        //     console.log(error)
+        // })
     }
+
+    const checkEmpty=()=>{
+        if(client.first_name != '' && client.last_name != '' && client.email != '' && client.password != '' && client.mobile != '' && client.birthday != ''){
+            return false
+        }else{
+            return true
+        }
+    }
+    const checkValidation=()=>{
+        let  validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        let  errors = {}
+        if(!client.email.match(validRegex)){
+            errors.email = "Please enter valid email";
+        }
+        if(!client.email.match(validRegex)){
+            errors.email = "Please enter valid email";
+        }
+
+        let birthdateArgs = client.birthday.split("-");
+        console.log(birthdateArgs)
+        return errors;
+
+
+    }
+
+    console.log(checkEmpty())
 
   return (
       <Container>
@@ -75,7 +106,9 @@ const CreateClient = (props) => {
                   <Title>Add New Clients</Title>
               </Body>
               <Right>
-
+                  <Button transparent onPress={props.hideModal}>
+                      <Icon name='close' />
+                  </Button>
               </Right>
           </Header>
           <Content style={{paddingHorizontal: 10}}>
@@ -97,7 +130,7 @@ const CreateClient = (props) => {
                                   changeHandler={(text)=>_changeText(text,item.name)}
                               />
                           ) : (<Item regular last style={{marginTop:10}}>
-                          <Input placeholder={item.label} disabled={item.name == 'referral_code'} value={client[item.name]} secureTextEntry={item.name == 'password'} onChangeText={(text)=>_changeText(text,item.name)} name={item.name} />
+                          <Input placeholder={`${item.label} *`} disabled={item.name == 'referral_code'} value={client[item.name]} secureTextEntry={item.name == 'password'} onChangeText={(text)=>_changeText(text,item.name)} name={item.name} />
                       </Item>)
                   })}
 
@@ -114,10 +147,9 @@ const CreateClient = (props) => {
                   <Picker.Item label="Male" value="Male" />
                   <Picker.Item label="Non Binary" value="Non Binary" />
               </Picker>
-
-                  <Button onPress={()=>submitForm()} full style={{...helperFunctions.themeBg(),marginTop: 10}}>
-                      <Text style={{color:'#fff'}}>Create</Text>
-                  </Button>
+              <TouchableOpacity disabled={checkEmpty} onPress={()=>submitForm()} full style={{backgroundColor: checkEmpty() == true ? "#ddd" : '#424E9C',marginTop: 10}}>
+                  {loading == true ? <ActivityIndicator/> : <Text style={{color:'#fff'}}>Create</Text>}
+              </TouchableOpacity>
               </Form>
           </Content>
       </Container>

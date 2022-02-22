@@ -11,9 +11,9 @@ const MaskedInput = (props) => {
           style={{
               borderWidth:1,
               borderColor:'#ccc',
-              paddingVertical: 17,
+              paddingVertical: 12,
               marginTop:10,
-              paddingHorizontal: 18
+              paddingHorizontal: 25
           }}
           placeholder={placeholder}
           placeholderTextColor="#666"
