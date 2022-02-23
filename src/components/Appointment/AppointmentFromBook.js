@@ -30,7 +30,10 @@ import {
     Label,
     Picker,
     Input, Textarea, Button, Toast,
+    Card, CardItem,
+    Header
 } from 'native-base';
+
 import HeaderComponent from '../Header/header';
 import Moment from 'moment';
 import styles from './styles';
@@ -158,7 +161,8 @@ class Appointment extends Component {
             clientSelected: false,
             saveBooking: true,
             errors:{},
-            visibility: false
+            visibility: false,
+            popUp: false
         };
     }
 
@@ -814,9 +818,9 @@ class Appointment extends Component {
             items: [],
         }, () => {
             this.setState({
-                clientSelected: !this.state.clientSelected
+                clientSelected: !this.state.clientSelected,
+                popUp: true
             })
-            console.log(this.state.clientInfo);
         });
     };
 
@@ -981,7 +985,24 @@ class Appointment extends Component {
             items: [],
         }, () => {
             this.setState({
-                clientSelected: !this.state.clientSelected
+                clientSelected: !this.state.clientSelected,
+                popUp: true
+            })
+        });
+    }
+
+    cancelProcess=()=>{
+        this.setState({
+            clientInfo:{},
+            value: '',
+            client: {
+                id: '',
+            },
+            items: [],
+        }, () => {
+            this.setState({
+                clientSelected: !this.state.clientSelected,
+                popUp: false
             })
         });
     }
@@ -1028,7 +1049,7 @@ class Appointment extends Component {
                                         ...helperFunctions.textBlack(),
                                         ...helperFunctions.themeColor(),
                                     }}>
-                                    Search clients
+                                    Search or create clients
                                 </Text>
                                     <View style={{height: 15}}/>
 
@@ -1706,6 +1727,30 @@ class Appointment extends Component {
                 <Modal style={{margin: 0}} isVisible={visibility}>
                     <CreateClient getClient={this.getClientInfo} hideModal={()=>this.setState({visibility: false})}/>
                 </Modal>
+                <Modal hasBackdrop={false} style={{margin: 0,height: 200,backgroundColor:'red'}} isVisible={false}>
+                    <View style={{paddingHorizontal: 40}}>
+                        <Card>
+                            <CardItem header bordered style={{...helperFunctions.themeBg()}}>
+                                <Text style={{fontSize: 20,color:'#fff'}}>ADD SERVICES</Text>
+                            </CardItem>
+                            <CardItem bordered>
+                                <Body>
+                                    <Text style={{fontSize: 20}}>
+                                        Would you like to add service/services to continue the process?
+                                    </Text>
+                                </Body>
+                            </CardItem>
+                            <CardItem footer bordered>
+                                <View style={{...helperFunctions.flexRow(),justifyContent:'space-between',width:'100%'}}>
+                                    <TouchableOpacity onPress={()=>this.cancelProcess()}><Text style={{fontWeight:'700',...helperFunctions.themeColor()}}>NO</Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={this.toggleAddModal}><Text style={{fontWeight:'700',...helperFunctions.themeColor()}}>YES</Text></TouchableOpacity>
+                                </View>
+                            </CardItem>
+                        </Card>
+                    </View>
+                </Modal>
+
+
 
             </Fragment>
 
