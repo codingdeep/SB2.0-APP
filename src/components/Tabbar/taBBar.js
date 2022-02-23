@@ -8,18 +8,32 @@ import styles from './styles';
 import { useColorScheme, Appearance } from 'react-native-appearance'
 import { useTheme } from '../../Theme/hooks'
 const { colors } = useTheme()
+
 class TaBBar extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            actives: 0
+            actives: 0,
+            keys:'',
         }
     }
     handleTab = (route, index) =>{
-        this.props.navigation.navigate(route.routeName);
+        //alert(JSON.stringify(route))
         this.setState({
             actives: index
         })
+        if(route.key == 'Clients') {
+            if(route.index && route.index != 0){
+                this.props.navigation.navigate('Clients');
+                this.props.navigation.goBack();
+            }else {
+                this.props.navigation.navigate('Clients');
+            }
+        }else {
+            this.props.navigation.navigate(route.routeName);
+        }
+
+
     }
 
     render() {

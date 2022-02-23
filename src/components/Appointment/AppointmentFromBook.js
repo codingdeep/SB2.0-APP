@@ -73,6 +73,7 @@ import {Appearance, AppearanceProvider} from 'react-native-appearance';
 import Items from './items';
 import CheckIn from '../Modal/checkIn';
 import Entypo from 'react-native-vector-icons/Entypo';
+import CreateClient from "../Clinets/createClient";
 
 const defaultMode = Appearance.getColorScheme() || 'light';
 
@@ -156,7 +157,8 @@ class Appointment extends Component {
             actionSheetOpen: false,
             clientSelected: false,
             saveBooking: true,
-            errors:{}
+            errors:{},
+            visibility: false
         };
     }
 
@@ -969,11 +971,24 @@ class Appointment extends Component {
             actionSheetOpen: !this.state.actionSheetOpen
         })
     }
+    getClientInfo=(info)=>{
+        this.setState({
+            clientInfo:info,
+            value: info.fullName,
+            client: {
+                id: info.id,
+            },
+            items: [],
+        }, () => {
+            this.setState({
+                clientSelected: !this.state.clientSelected
+            })
+        });
+    }
 
 
     render() {
-        console.log(this.state.clientInfo.id && this.state.clientInfo.id)
-        const {show, apptDate, mode, search, clientRoute, clientInfo, payload, productName, items} = this.state;
+        const {show, apptDate, mode, search, clientRoute, clientInfo, payload, productName, items, visibility} = this.state;
 
         const {navigation} = this.props;
 
@@ -1037,6 +1052,9 @@ class Appointment extends Component {
                                             placeholder="Search here"
                                             onChangeText={text => this.searchItems(text)}
                                         />
+                                        <TouchableOpacity onPress={()=>this.setState({visibility: true})}>
+                                            <Text style={{...helperFunctions.themeColor()}}>+ Add New</Text>
+                                        </TouchableOpacity>
                                     </Item></>
                                 }
 
@@ -1684,6 +1702,11 @@ class Appointment extends Component {
                              id={this.state.client.id}
                              translateY={this.state.actionSheetOpen}/>
                 }
+
+                <Modal style={{margin: 0}} isVisible={visibility}>
+                    <CreateClient getClient={this.getClientInfo} hideModal={()=>this.setState({visibility: false})}/>
+                </Modal>
+
             </Fragment>
 
 

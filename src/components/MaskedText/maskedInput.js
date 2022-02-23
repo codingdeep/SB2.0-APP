@@ -5,13 +5,13 @@ import {TextInputMask} from "react-native-masked-text";
 
 
 const MaskedInput = (props) => {
-    let {value,changeHandler,placeholder,mask} = props
+    let {value,changeHandler,placeholder,mask,error} = props
   return (
       <TextInputMask
           style={{
               borderWidth:1,
-              borderColor:'#ccc',
-              paddingVertical: 12,
+              borderColor:error == true ? 'red' :'#ccc',
+              paddingVertical: 18,
               marginTop:10,
               paddingHorizontal: 25
           }}

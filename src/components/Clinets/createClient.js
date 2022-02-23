@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, StatusBar, ActivityIndicator, TouchableOpacity} from 'react-native';
-import { Body,Left,Container, Header, Content, Form, Item, Input, Label,Title,Button,Icon,Right,Picker } from 'native-base';
-import {TextInputMask} from 'react-native-masked-text'
+import {View, Text, SafeAreaView, StatusBar, ActivityIndicator, TouchableOpacity, Alert} from 'react-native';
+import { Body,Left,Container, Header, Content, Form, Item, Input, Toast,Title,Button,Icon,Right,Picker } from 'native-base';
+
 import MaskedInput from "../MaskedText/maskedInput";
 import {helperFunctions} from "../../_helpers";
 import AsyncStorage from "@react-native-community/async-storage";
 import {createNewClient} from "../../Redux/SagaActions/clients_saga_action";
+import {toast} from "../Toast/Toast";
 const form_data = [
     {label:'First Name',name:'first_name'},
     {label:'Last Name',name:'last_name'},
@@ -18,6 +19,7 @@ const form_data = [
 ]
 const CreateClient = (props) => {
     const [selected,setSelected] = useState('Female')
+    const [disabled,setDisabled] = useState(false)
     const [client,setClient] = useState({
         first_name: '',
         last_name: '',
@@ -29,15 +31,15 @@ const CreateClient = (props) => {
 
     })
     const [loading, setLoading] = useState(false)
-    const [error,setError] = useState({})
+    const [errors,setErrors] = useState({})
     const onValueChange=(item)=>setSelected(item)
     const _changeText=(text,name)=>{
         setClient({...client,[name]:text})
     }
 
     const submitForm = async ()=>{
-        alert()
         setLoading(true)
+        setDisabled(true)
 
         let userInfo = JSON.parse(await AsyncStorage.getItem('User@Data'));
 
@@ -60,39 +62,69 @@ const CreateClient = (props) => {
             }
         }
 
-        const error = checkValidation()
+        const errors = checkValidation()
+        setErrors(errors)
+        if(Object.keys(errors).length == 0){
+           let result = await createNewClient(newUser)
+            if(result.message){
+                Alert.alert(result.message);
+            }else {
+                if(props.getClient){
+                    props.getClient(result)
+                }
+                setClient({
+                    first_name: '',
+                    last_name: '',
+                    email:'',
+                    password:'',
+                    mobile: '',
+                    birthday: '',
+                    referral_code:'SH2O'
+                })
+                setSelected('Female')
+                toast("Client successfully created!", "BOTTOM");
+                props.hideModal()
+            }
+            setLoading(false)
+            setDisabled(false)
+        }else {
+            setLoading(false)
+            setDisabled(false)
+        }
 
-        // await createNewClient(newUser).then(response=>{
-        // }).catch(error=>{
-        //     console.log(error)
-        // })
     }
 
     const checkEmpty=()=>{
-        if(client.first_name != '' && client.last_name != '' && client.email != '' && client.password != '' && client.mobile != '' && client.birthday != ''){
+        if(client.first_name != '' && client.last_name != '' && client.email != '' && client.password != '' && client.mobile != '' && client.birthday != '' && disabled == false){
             return false
         }else{
             return true
         }
     }
     const checkValidation=()=>{
-        let  validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        let  validRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let  mobileRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/
         let  errors = {}
         if(!client.email.match(validRegex)){
             errors.email = "Please enter valid email";
         }
-        if(!client.email.match(validRegex)){
-            errors.email = "Please enter valid email";
+
+        if(!client.mobile.replace(' ', '').replace('+1', '').replace(')', '').replace('(', '').replace(' ', '').replace('-', '').match(mobileRegex)){
+            errors.mobile = "Please enter valid mobile";
         }
 
-        let birthdateArgs = client.birthday.split("-");
-        console.log(birthdateArgs)
+        let birthdayArgs = client.birthday.split("-");
+        if(birthdayArgs.length == 2){
+            if((birthdayArgs[0]*1) + (birthdayArgs[1]*1) > 43){
+                errors.birthday = "Please enter valid birth day";
+            }
+        }else {
+            errors.birthday = "Please enter valid birth day";
+        }
         return errors;
 
 
     }
-
-    console.log(checkEmpty())
 
   return (
       <Container>
@@ -117,6 +149,7 @@ const CreateClient = (props) => {
                   {form_data.map((item,key)=>{
                       return item.name=='mobile' ?
                           (<MaskedInput
+                                  error={errors[item.name] != undefined}
                                   placeholder="Mobile *"
                                   mask='+1 (999) 999-9999'
                                   value={client.mobile}
@@ -124,12 +157,13 @@ const CreateClient = (props) => {
                               />)
                           : item.name == 'birthday' ? (
                               <MaskedInput
+                                  error={errors[item.name] != undefined}
                                   placeholder="Next Birthday (MM-DD)*"
                                   mask='99-99'
                                   value={client.birthday}
                                   changeHandler={(text)=>_changeText(text,item.name)}
                               />
-                          ) : (<Item regular last style={{marginTop:10}}>
+                          ) : (<Item regular last style={{marginTop:10}} error={errors[item.name] !== undefined }>
                           <Input placeholder={`${item.label} *`} disabled={item.name == 'referral_code'} value={client[item.name]} secureTextEntry={item.name == 'password'} onChangeText={(text)=>_changeText(text,item.name)} name={item.name} />
                       </Item>)
                   })}
@@ -147,9 +181,9 @@ const CreateClient = (props) => {
                   <Picker.Item label="Male" value="Male" />
                   <Picker.Item label="Non Binary" value="Non Binary" />
               </Picker>
-              <TouchableOpacity disabled={checkEmpty} onPress={()=>submitForm()} full style={{backgroundColor: checkEmpty() == true ? "#ddd" : '#424E9C',marginTop: 10}}>
+              <Button disabled={checkEmpty()} onPress={()=>submitForm()} full style={{backgroundColor: checkEmpty() == true ? "#ddd" : '#424E9C',marginTop: 10}}>
                   {loading == true ? <ActivityIndicator/> : <Text style={{color:'#fff'}}>Create</Text>}
-              </TouchableOpacity>
+              </Button>
               </Form>
           </Content>
       </Container>

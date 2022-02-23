@@ -5,21 +5,15 @@ import {
   View,
   Image,
   TouchableOpacity,
-  SectionList,
   FlatList,
-  ActivityIndicator,
 } from 'react-native';
 import {Container, Label} from 'native-base';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {GetAllClients} from '../../Redux/Action/ClientsAction';
-import {ScrollView} from 'react-native-gesture-handler';
-import Moment from 'moment';
 import LOADER from '../Loader/Loader';
 import Search from './search';
 import HeaderComponent from '../Header/header';
-import CellPhoneNumFormat from '../ImportantFunction/cellPhoneNumFormat';
-import DecimalFormat from '../ImportantFunction/decimalFormat';
 import RefreshFooter from '../ImportantFunction/refreshFooter';
 import {GetClientsNextPage} from '../../Redux/SagaActions/clients_saga_action';
 import {Appearance, AppearanceProvider} from 'react-native-appearance';
@@ -47,14 +41,13 @@ class clientsProfile extends Component {
         "willFocus",
         () => {
 
-          this.state.item != '' && this.toggleModal(this.state.item);
+          //this.state.item != '' && this.toggleModal(this.state.item);
 
         }
     );
   }
 
   componentDidMount() {
-    console.log(' this.props.businessId,', this.props.businessId);
 
     this.props.dispatch(
       GetAllClients(this.props.businessId, this.props.navigation),
@@ -62,7 +55,7 @@ class clientsProfile extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const {AllClientsData, ClientsLoader} = props;
+    const {ClientsLoader} = props;
 
     return {
       // tasksValue: AllClientsData,
@@ -72,7 +65,7 @@ class clientsProfile extends Component {
   }
 
   searchClient = async cilent => {
-    console.log('dsfasdfasdfadfs', cilent);
+    //console.log('dsfasdfasdfadfs', cilent);
     this.state.AllClientsData = cilent;
     this.setState({
       AllClientsData: cilent,
@@ -86,12 +79,12 @@ class clientsProfile extends Component {
     this.state.load = false;
     let offSet = this.state.offSet + 1;
     this.setState({footerLoading: true});
-    console.log('adsfasfasfd');
+    //console.log('adsfasfasfd');
     GetClientsNextPage(
       this.props.businessId,
       offSet,
       response => {
-        console.log('response.Body', response);
+        //console.log('response.Body', response);
 
         if (response && response.length > 0) {
           this.setState({
@@ -159,7 +152,7 @@ class clientsProfile extends Component {
   render() {
     // <Item title={item} />
     const {AllClientsData, ClientsLoader} = this.props;
-    console.log('PROPS', AllClientsData);
+    //console.log('PROPS', AllClientsData);
 
     // console.log('this.props', AllClientsData);
     return ClientsLoader == false ? (
