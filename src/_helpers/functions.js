@@ -71,7 +71,7 @@ export const helperFunctions = {
 
 function headerHeight() {
   return {
-    height: 100
+    height: 80
   }
 }
 
@@ -239,7 +239,7 @@ function deviceWiseWidth(sm, md, lg, exlg) {
 function inputHeight() {
   if (width <= 480) {
     return {
-      height: 60
+      height: 45
     }
   }
   if (width <= 760) {

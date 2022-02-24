@@ -253,7 +253,7 @@ class Appointment extends Component {
     getSingleVisit = visitId => {
         _getSingleVisit(visitId).then(res => {
 
-            console.log('ede',res);
+            //console.log('ede',res);
 
             const visits = [];
             res.visitTechnicians.map(vt => {
@@ -398,7 +398,7 @@ class Appointment extends Component {
                     isEditable: false,
                 },
                 () => {
-                    console.log(this.state.visitTechnicians);
+                    //console.log(this.state.visitTechnicians);
                 },
             );
         }
@@ -1042,7 +1042,7 @@ class Appointment extends Component {
                             {!this.props.navigation.state.params.calendar &&
                             <View>
 
-                                <View style={{height: 15}}/>
+                                <View style={{height: 10}}/>
                                 {this.props.navigation.state.params.ClientInfo == undefined &&
                                 <><Text
                                     style={{
@@ -1051,7 +1051,7 @@ class Appointment extends Component {
                                     }}>
                                     Search or create clients
                                 </Text>
-                                    <View style={{height: 15}}/>
+                                    <View style={{height: 8}}/>
 
 
                                     <Item
@@ -1205,16 +1205,16 @@ class Appointment extends Component {
                                     }
                                 </View>
 
-                                <View style={{height: 20}}/>
+                                <View style={{height: 10}}/>
                                 {Object.keys(clientInfo).length > 0 &&
                                 <List>
                                     <ListItem
                                         style={{
-                                            ...helperFunctions.assBg(),
                                             borderBottomWidth: 0,
                                             marginLeft: 0,
                                             paddingHorizontal: 25,
                                             borderRadius: 3,
+
                                         }}>
                                         <View style={{
                                             ...helperFunctions.flexRow(),
@@ -1230,7 +1230,7 @@ class Appointment extends Component {
                                                         ...helperFunctions.assColor(),
                                                         marginRight: 20,
                                                     }}>
-                                                    Last Visit:
+                                                    Last visit:
                                                 </Text>
                                                 <Text
                                                     style={{
@@ -1251,14 +1251,13 @@ class Appointment extends Component {
 
                                         </View>
                                     </ListItem>
-                                    <View style={{height: 10}}/>
                                     <ListItem
                                         style={{
                                             marginLeft: 0,
                                             borderBottomWidth: 0,
-                                            ...helperFunctions.assBg(),
                                             paddingHorizontal: 25,
                                             borderRadius: 3,
+                                            marginTop: -15
                                         }}>
                                         <View style={{...helperFunctions.flexRow(), alignItems: 'center'}}>
                                             <Text
@@ -1268,7 +1267,7 @@ class Appointment extends Component {
                                                     ...helperFunctions.assColor(),
                                                     marginRight: 20,
                                                 }}>
-                                                Next Visit:
+                                                Next visit:
                                             </Text>
                                             <Text
                                                 style={{
@@ -1283,15 +1282,13 @@ class Appointment extends Component {
                                         </View>
                                     </ListItem>
 
-
-                                    <View style={{height: 10}}/>
                                     <ListItem
                                         style={{
                                             marginLeft: 0,
                                             borderBottomWidth: 0,
-                                            ...helperFunctions.assBg(),
                                             paddingHorizontal: 25,
                                             borderRadius: 3,
+                                            marginTop: -15
                                         }}>
                                         <View
                                             style={{marginLeft: 0, ...helperFunctions.flexRow(), alignItems: 'center'}}>
@@ -1313,15 +1310,13 @@ class Appointment extends Component {
                                         </View>
                                     </ListItem>
 
-
-                                    <View style={{height: 10}}/>
                                     <ListItem
                                         style={{
                                             marginLeft: 0,
                                             borderBottomWidth: 0,
-                                            ...helperFunctions.assBg(),
                                             paddingHorizontal: 25,
                                             borderRadius: 3,
+                                            marginTop: -15
                                         }}>
                                         <Col>
                                             <Text
@@ -1376,43 +1371,47 @@ class Appointment extends Component {
                                     </ListItem>
 
                                     <View style={{height: 10}}/>
-                                    <ListItem
-                                        style={{
-                                            borderBottomWidth: 0,
-                                            marginLeft: 0,
-                                            ...helperFunctions.assBg(),
-                                            paddingHorizontal: 25,
-                                            borderRadius: 3,
-                                        }}>
-                                        <Col>
-                                            <Text
-                                                style={{
-                                                    ...helperFunctions.textBlack(),
-                                                    ...helperFunctions.textSize(),
-                                                    ...helperFunctions.assColor(),
-                                                }}>
-                                                {/* {clientInfo.rewardBalance} */}
-                                                Client Note
-                                            </Text>
 
-                                            <TextInput
-                                                style={{
-                                                    paddingHorizontal: 5,
-                                                    paddingVertical: 30,
-                                                    color: helperFunctions.darkLightColor(),
-                                                }}
-                                                placeholder="Please enter note (max 1200 chars)"
-                                                placeholderTextColor="#999999"
-                                                fontFamily={'Poppins-Medium'}
-                                                fontSize={13.5}
-                                                multiline={true}
-                                                maxLength={1200}
-                                                padding={0}
-                                                onChangeText={text => this.onNoteChange(text)}
-                                                value={this.state.staffNotes }
-                                            />
-                                        </Col>
-                                    </ListItem>
+
+
+
+                                    {/*<ListItem*/}
+                                    {/*    style={{*/}
+                                    {/*        borderBottomWidth: 0,*/}
+                                    {/*        marginLeft: 0,*/}
+                                    {/*        ...helperFunctions.assBg(),*/}
+                                    {/*        paddingHorizontal: 25,*/}
+                                    {/*        borderRadius: 3,*/}
+                                    {/*    }}>*/}
+                                    {/*    <Col>*/}
+                                    {/*        <Text*/}
+                                    {/*            style={{*/}
+                                    {/*                ...helperFunctions.textBlack(),*/}
+                                    {/*                ...helperFunctions.textSize(),*/}
+                                    {/*                ...helperFunctions.assColor(),*/}
+                                    {/*            }}>*/}
+                                    {/*            /!* {clientInfo.rewardBalance} *!/*/}
+                                    {/*            Client Note*/}
+                                    {/*        </Text>*/}
+
+                                    {/*        <TextInput*/}
+                                    {/*            style={{*/}
+                                    {/*                paddingHorizontal: 5,*/}
+                                    {/*                paddingVertical: 30,*/}
+                                    {/*                color: helperFunctions.darkLightColor(),*/}
+                                    {/*            }}*/}
+                                    {/*            placeholder="Please enter note (max 1200 chars)"*/}
+                                    {/*            placeholderTextColor="#999999"*/}
+                                    {/*            fontFamily={'Poppins-Medium'}*/}
+                                    {/*            fontSize={13.5}*/}
+                                    {/*            multiline={true}*/}
+                                    {/*            maxLength={1200}*/}
+                                    {/*            padding={0}*/}
+                                    {/*            onChangeText={text => this.onNoteChange(text)}*/}
+                                    {/*            value={this.state.staffNotes }*/}
+                                    {/*        />*/}
+                                    {/*    </Col>*/}
+                                    {/*</ListItem>*/}
                                     {this.state.status == 'Booked' && this.props.customerBookingAllowed == true &&
                                     <><View style={{height: 10}}/>
                                         <Col>
@@ -1441,6 +1440,8 @@ class Appointment extends Component {
                                     }
 
                                     <View style={{height: 10}}/>
+                                    {this.state.visitTechnicians &&
+                                    this.state.visitTechnicians.length > 0 &&
                                     <ListItem
                                         style={{
                                             // height: 49,
@@ -1463,18 +1464,25 @@ class Appointment extends Component {
                                         <Right>
 
                                             {!this.props.navigation.state.params.status ?
-                                                <TouchableOpacity onPress={this.toggleAddModal}>
-                                                    <Feather name="plus" size={25}
+                                                <TouchableOpacity
+                                                    style={{...helperFunctions.flexRow(), alignItems: 'center'}}
+                                                    onPress={this.toggleAddModal}>
+                                                    <Feather name="plus" size={18}
                                                              color={defaultMode === 'dark' ? 'white' : '#424E9C'}/>
+                                                    <Text style={{color: '#424E9C'}}> More</Text>
                                                 </TouchableOpacity>
                                                 : this.props.navigation.state.params.status && this.props.navigation.state.params.status != 'Checked Out' ?
-                                                    <TouchableOpacity onPress={this.toggleAddModal}>
-                                                        <Feather name="plus" size={25}
+                                                    <TouchableOpacity
+                                                        style={{...helperFunctions.flexRow(), alignItems: 'center'}}
+                                                        onPress={this.toggleAddModal}>
+                                                        <Feather name="plus" size={18}
                                                                  color={defaultMode === 'dark' ? 'white' : '#424E9C'}/>
+                                                        <Text style={{color: '#424E9C'}}> More</Text>
                                                     </TouchableOpacity>
                                                     : <Text/>}
                                         </Right>
                                     </ListItem>
+                                    }
 
                                     {this.state.visitTechnicians &&
                                     this.state.visitTechnicians.length > 0 &&
@@ -1567,11 +1575,13 @@ class Appointment extends Component {
 
                                 <Label style={{height: 20}}/>
                             </View>
-                            <View style={{height: 62}}/>
+
                         </View>
 
                     </ScrollView>
+
                 </View>
+
                 <View>
                     <Modal
                         style={{margin: 0}}
@@ -1749,8 +1759,14 @@ class Appointment extends Component {
                         </Card>
                     </View>
                 </Modal>
-
-
+                {this.state.clientInfo != '' && this.state.visitTechnicians.length == 0 &&
+                <View>
+                    <Button onPress={() => this.toggleAddModal()} full style={{backgroundColor: '#D39E17'}}>
+                        <Text style={{fontSize: 20, color: '#fff', fontWeight: '700'}}>Next <AntDesign size={17}
+                                                                                                       name="right"/></Text>
+                    </Button>
+                </View>
+                }
 
             </Fragment>
 

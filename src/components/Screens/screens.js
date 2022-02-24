@@ -188,6 +188,9 @@ const My_book = createStackNavigator(
     },
   },
   {
+      navigationOptions: ({ navigation }) => ({
+          tabBarVisible: navigation.state.index < 1,
+      }),
     headerMode: 'none',
     initialRoute: 'MyBook',
   },
