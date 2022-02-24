@@ -1028,7 +1028,7 @@ class Appointment extends Component {
                         // forFunction="true"
                         // rightImg="rightImg"
                         rightTitle={
-                            !this.props.navigation.state.params.status ? 'Add Appt' : this.props.navigation.state.params.status && this.props.navigation.state.params.status == 'Checked Out' && this.state.visitTechnicians.length > 0 && this.props.navigation.state.params.realUpdate == true ? 'Details' : this.props.navigation.state.params.status && this.props.navigation.state.params.status != 'Checked Out' && this.state.visitTechnicians.length > 0 && this.props.navigation.state.params.realUpdate == true ? 'Update' : 'Add Appt'}
+                           this.state.visitTechnicians.length > 0 && !this.props.navigation.state.params.status ? 'Add Appt' : this.props.navigation.state.params.status && this.props.navigation.state.params.status == 'Checked Out' && this.state.visitTechnicians.length > 0 && this.props.navigation.state.params.realUpdate == true ? 'Details' : this.props.navigation.state.params.status && this.props.navigation.state.params.status != 'Checked Out' && this.state.visitTechnicians.length > 0 && this.props.navigation.state.params.realUpdate == true ? 'Update' : null}
 
                         onFunctionCall={!this.props.navigation.state.params.status && this.state.saveBooking != false ? () => this.saveBooking() : this.props.navigation.state.params.status && this.props.navigation.state.params.status == 'Checked Out' && this.state.visitTechnicians.length > 0 && this.props.navigation.state.params.realUpdate == true ? () => console.log('Deetails') : this.props.navigation.state.params.status && this.props.navigation.state.params.status != 'Checked Out' && this.state.visitTechnicians.length > 0 && this.props.navigation.state.params.realUpdate == true && this.state.saveBooking != false ?  () => this.saveBooking() : this.state.saveBooking != false ? () => this.saveBooking() : () => console.log('Do Nothing')}
                         {...this.props}
@@ -1373,45 +1373,43 @@ class Appointment extends Component {
                                     <View style={{height: 10}}/>
 
 
+                                    <ListItem
+                                        style={{
+                                            borderBottomWidth: 0,
+                                            marginLeft: 0,
+                                            ...helperFunctions.assBg(),
+                                            paddingHorizontal: 25,
+                                            borderRadius: 3,
+                                        }}>
+                                        <Col>
+                                            <Text
+                                                style={{
+                                                    ...helperFunctions.textBlack(),
+                                                    ...helperFunctions.textSize(),
+                                                    ...helperFunctions.assColor(),
+                                                }}>
+                                                {/* {clientInfo.rewardBalance} */}
+                                                Client Note
+                                            </Text>
 
-
-                                    {/*<ListItem*/}
-                                    {/*    style={{*/}
-                                    {/*        borderBottomWidth: 0,*/}
-                                    {/*        marginLeft: 0,*/}
-                                    {/*        ...helperFunctions.assBg(),*/}
-                                    {/*        paddingHorizontal: 25,*/}
-                                    {/*        borderRadius: 3,*/}
-                                    {/*    }}>*/}
-                                    {/*    <Col>*/}
-                                    {/*        <Text*/}
-                                    {/*            style={{*/}
-                                    {/*                ...helperFunctions.textBlack(),*/}
-                                    {/*                ...helperFunctions.textSize(),*/}
-                                    {/*                ...helperFunctions.assColor(),*/}
-                                    {/*            }}>*/}
-                                    {/*            /!* {clientInfo.rewardBalance} *!/*/}
-                                    {/*            Client Note*/}
-                                    {/*        </Text>*/}
-
-                                    {/*        <TextInput*/}
-                                    {/*            style={{*/}
-                                    {/*                paddingHorizontal: 5,*/}
-                                    {/*                paddingVertical: 30,*/}
-                                    {/*                color: helperFunctions.darkLightColor(),*/}
-                                    {/*            }}*/}
-                                    {/*            placeholder="Please enter note (max 1200 chars)"*/}
-                                    {/*            placeholderTextColor="#999999"*/}
-                                    {/*            fontFamily={'Poppins-Medium'}*/}
-                                    {/*            fontSize={13.5}*/}
-                                    {/*            multiline={true}*/}
-                                    {/*            maxLength={1200}*/}
-                                    {/*            padding={0}*/}
-                                    {/*            onChangeText={text => this.onNoteChange(text)}*/}
-                                    {/*            value={this.state.staffNotes }*/}
-                                    {/*        />*/}
-                                    {/*    </Col>*/}
-                                    {/*</ListItem>*/}
+                                            <TextInput
+                                                style={{
+                                                    paddingHorizontal: 5,
+                                                    paddingVertical: 30,
+                                                    color: helperFunctions.darkLightColor(),
+                                                }}
+                                                placeholder="Please enter note (max 1200 chars)"
+                                                placeholderTextColor="#999999"
+                                                fontFamily={'Poppins-Medium'}
+                                                fontSize={13.5}
+                                                multiline={true}
+                                                maxLength={1200}
+                                                padding={0}
+                                                onChangeText={text => this.onNoteChange(text)}
+                                                value={this.state.staffNotes }
+                                            />
+                                        </Col>
+                                    </ListItem>
                                     {this.state.status == 'Booked' && this.props.customerBookingAllowed == true &&
                                     <><View style={{height: 10}}/>
                                         <Col>
@@ -1510,41 +1508,41 @@ class Appointment extends Component {
                                         </Fragment>
                                     ))}
 
-                                    {this.props.StoreAllData &&
-                                    this.props.StoreAllData.locations[0].brands.length > 0 &&
-                                    this.state.visitTechnicians.length > 0 && (
-                                        <ListItem
-                                            style={{
-                                                // height: 49,
-                                                backgroundColor: '#F1F0F5',
-                                                paddingHorizontal: 20,
-                                                borderBottomWidth: 0,
-                                                borderRadius: 3,
-                                                marginLeft: 0,
-                                                ...helperFunctions.assBg(),
-                                            }}>
-                                            <Left>
-                                                <Text style={{...helperFunctions.textBlack()}}>
-                                                    {/* {clientInfo.rewardBalance} */}
-                                                    Products
-                                                </Text>
-                                            </Left>
-                                            <Right>
+                                    {/*{this.props.StoreAllData &&*/}
+                                    {/*this.props.StoreAllData.locations[0].brands.length > 0 &&*/}
+                                    {/*this.state.visitTechnicians.length > 0 && (*/}
+                                    {/*    <ListItem*/}
+                                    {/*        style={{*/}
+                                    {/*            // height: 49,*/}
+                                    {/*            backgroundColor: '#F1F0F5',*/}
+                                    {/*            paddingHorizontal: 20,*/}
+                                    {/*            borderBottomWidth: 0,*/}
+                                    {/*            borderRadius: 3,*/}
+                                    {/*            marginLeft: 0,*/}
+                                    {/*            ...helperFunctions.assBg(),*/}
+                                    {/*        }}>*/}
+                                    {/*        <Left>*/}
+                                    {/*            <Text style={{...helperFunctions.textBlack()}}>*/}
+                                    {/*                /!* {clientInfo.rewardBalance} *!/*/}
+                                    {/*                Products*/}
+                                    {/*            </Text>*/}
+                                    {/*        </Left>*/}
+                                    {/*        <Right>*/}
 
-                                                {!this.props.navigation.state.params.status ?
-                                                    <TouchableOpacity onPress={this.toggleProductModal}>
-                                                        <Feather name="plus" size={25}
-                                                                 color={defaultMode === 'dark' ? 'white' : '#424E9C'}/>
-                                                    </TouchableOpacity>
-                                                    : this.props.navigation.state.params.status && this.props.navigation.state.params.status != 'Checked Out' ?
-                                                        <TouchableOpacity onPress={this.toggleProductModal}>
-                                                            <Feather name="plus" size={25}
-                                                                     color={defaultMode === 'dark' ? 'white' : '#424E9C'}/>
-                                                        </TouchableOpacity>
-                                                        : <Text/>}
-                                            </Right>
-                                        </ListItem>
-                                    )}
+                                    {/*            {!this.props.navigation.state.params.status ?*/}
+                                    {/*                <TouchableOpacity onPress={this.toggleProductModal}>*/}
+                                    {/*                    <Feather name="plus" size={25}*/}
+                                    {/*                             color={defaultMode === 'dark' ? 'white' : '#424E9C'}/>*/}
+                                    {/*                </TouchableOpacity>*/}
+                                    {/*                : this.props.navigation.state.params.status && this.props.navigation.state.params.status != 'Checked Out' ?*/}
+                                    {/*                    <TouchableOpacity onPress={this.toggleProductModal}>*/}
+                                    {/*                        <Feather name="plus" size={25}*/}
+                                    {/*                                 color={defaultMode === 'dark' ? 'white' : '#424E9C'}/>*/}
+                                    {/*                    </TouchableOpacity>*/}
+                                    {/*                    : <Text/>}*/}
+                                    {/*        </Right>*/}
+                                    {/*    </ListItem>*/}
+                                    {/*)}*/}
                                     {this.state.purchaseItems.length > 0 &&
                                     this.state.purchaseItems.map((item, index) => {
                                         return (
@@ -1586,10 +1584,8 @@ class Appointment extends Component {
                     <Modal
                         style={{margin: 0}}
                         backgroundColor="white"
-                        animationIn="slideInDown"
-                        animationOut="slideOutDown"
-                        animationInTiming={1000}
-                        animationOutTiming={1000}
+                        animationIn="slideInRight"
+                        animationOut="slideInLeft"
                         isVisible={this.state.isModalVisible}>
                         <AddEditServices
                             item={this.state.item}

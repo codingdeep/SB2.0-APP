@@ -52,7 +52,7 @@ const CreateClient = (props) => {
                 last: client.last_name,
                 nick: client.first_name
             },
-            emailAddress:client.email,
+            emailAddress:client.email.toLowerCase(),
             mobileNumber:client.mobile.replace(' ', '').replace('+1', '').replace(')', '').replace('(', '').replace(' ', '').replace('-', ''),
             password:client.password,
             birthDate:"1900-"+client.birthday,
@@ -109,7 +109,7 @@ const CreateClient = (props) => {
             errors.email = "Please enter valid email";
         }
 
-        if(!client.mobile.replace(' ', '').replace('+1', '').replace(')', '').replace('(', '').replace(' ', '').replace('-', '').match(mobileRegex)){
+        if(!client.mobile.replace(' ', '').replace(')', '').replace('(', '').replace(' ', '').replace('-', '').match(mobileRegex)){
             errors.mobile = "Please enter valid mobile";
         }
 
@@ -151,7 +151,7 @@ const CreateClient = (props) => {
                           (<MaskedInput
                                   error={errors[item.name] != undefined}
                                   placeholder="Mobile *"
-                                  mask='+1 (999) 999-9999'
+                                  mask='(999) 999-9999'
                                   value={client.mobile}
                                   changeHandler={(text)=>_changeText(text,item.name)}
                               />)

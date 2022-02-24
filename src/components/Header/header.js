@@ -64,7 +64,7 @@ const customHeader = props => {
           <TouchableOpacity
             style={styles.right}
             onPress={() => props.onFunctionCall()}>
-            {props.rightTitle && (
+            {props.rightTitle && props.rightTitle != null &&  (
               <Title style={props.color ? [styles.textStyle, {color: props.color}] : styles.textStyle }>{props.rightTitle}</Title>
             )}
             {props.rightImg && (

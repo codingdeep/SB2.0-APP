@@ -120,7 +120,7 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 public class Version {
     private final static int VERSION_BUILD = 1;
     private final static int VERSION_MAJOR = 1;
-    private final static int VERSION_MINOR = 7;
+    private final static int VERSION_MINOR = 8;
 
     public static int getVersionCode() {
         return VERSION_BUILD *1000 *1000 + VERSION_MAJOR * 1000 + VERSION_MINOR;
