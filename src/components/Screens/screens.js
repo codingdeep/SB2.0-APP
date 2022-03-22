@@ -102,6 +102,30 @@ const clientsStack = createStackNavigator(
     initialRoute: 'Clients',
   },
 );
+
+clientsStack.navigationOptions = ({navigation}) => {
+    let tabBarVisible = true;
+    for (let i = 0; i < navigation.state.routes.length; i++) {
+        switch (navigation.state.routes[i].routeName) {
+            case 'Appointment':
+            case 'AppointmentBook':
+            case 'EditAppointment':
+            case 'AddEditServiceBook':
+            case 'MyBook':
+                tabBarVisible = false;
+                break;
+            default:
+                tabBarVisible = true;
+        }
+    }
+    return {
+        tabBarVisible
+    }
+};
+
+
+
+
 const todayStack = createStackNavigator(
   {
     TodayScreen: {
@@ -188,13 +212,31 @@ const My_book = createStackNavigator(
     },
   },
   {
-      navigationOptions: ({ navigation }) => ({
-          tabBarVisible: navigation.state.index < 1,
-      }),
     headerMode: 'none',
     initialRoute: 'MyBook',
   },
 );
+
+My_book.navigationOptions = ({navigation}) => {
+    let tabBarVisible = true;
+    for (let i = 0; i < navigation.state.routes.length; i++) {
+        switch (navigation.state.routes[i].routeName) {
+            case 'AddEditServiceBook':
+            case 'AppointmentBook':
+            case 'AddPaymentMethod':
+                tabBarVisible = false;
+                break;
+            default:
+                tabBarVisible = true;
+        }
+    }
+    return {
+        tabBarVisible
+    }
+};
+
+
+
 const Time_Sheet = createStackNavigator(
   {
     Time_Sheet: {

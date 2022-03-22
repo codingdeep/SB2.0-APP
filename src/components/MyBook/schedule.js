@@ -10,7 +10,7 @@ import {
   Row,
   Label,
   Grid,
-  Col,
+  Toast,
 } from 'native-base';
 
 import { View, Text, TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback } from 'react-native';
@@ -21,6 +21,8 @@ import { useTheme } from '../../Theme/hooks';
 import { helperFunctions } from '../../_helpers';
 import Modal from 'react-native-modal';
 import MiniModal from '../Modal/miniModal';
+import {Input} from "react-native-elements";
+import AntIcon from 'react-native-vector-icons/EvilIcons'
 
 const { colors } = useTheme();
 const DEFAULT_HEIGHT = 150;
@@ -182,7 +184,12 @@ class Schedule extends Component {
     return left
 }
 
-  checkNote=(value)=>{
+  checkNote=(note)=>{
+    Toast.show({
+      duration: 5000,
+      text: note,
+      buttonText: 'ok',
+    })
 
   }
 
@@ -217,6 +224,7 @@ class Schedule extends Component {
 
 
                   }}>
+
 
                     <View style={{...helperFunctions.flexRow(),width: 100,height:'100%',...helperFunctions.assMediumDark()}}>
                       <Text
@@ -296,7 +304,9 @@ class Schedule extends Component {
                 if (mainTime.isBetween(beforeTime, afterTime)) {
                   let items = this.findDuplicates(mainTime,i);
                   return  (
-                    <TouchableWithoutFeedback key={i} onPress={() => this.ViewDetails(value)}><Card key={i} transparent style={{
+                    <>
+
+                      <TouchableWithoutFeedback key={i} onPress={() => this.ViewDetails(value)}><Card key={i} transparent style={{
                       marginTop: -20,
                       position: 'absolute',
                       zIndex: 1,
@@ -305,6 +315,7 @@ class Schedule extends Component {
                       width: items.length > 0  ?  (width - 108) / items.length : width - 108,
                       left: items.length > 0 ? this.checkPosition(items,mainTime,i) : 103
                     }}>
+
                       <CardItem
                         style={{
                           borderLeftWidth: 5,
@@ -317,9 +328,7 @@ class Schedule extends Component {
                           paddingTop: 30
                         }}>
                         <View>
-                          {/*<View>
-                            <Text>{this.checkNote(value)}</Text>
-                          </View>*/}
+
                           <Text style={{ color: value.textColor, fontSize: 11 }}>
                             {/* Moment(value.start).format('hh:mm A') */}
                             {Moment(value.start).format('hh:mm A')} -{' '}
@@ -339,8 +348,13 @@ class Schedule extends Component {
                         </View>
 
                       </CardItem>
+                        {value.staffNotes != undefined && value.staffNotes != '' &&
+                        <TouchableOpacity onPress={()=>this.checkNote(value.staffNotes)} style={{position:'absolute',top: 3,left:-4,backgroundColor:'red'}}>
+                          <Text><AntIcon color="#fff" size={30} name="envelope"/></Text>
+                        </TouchableOpacity>
+                        }
                     </Card>
-                    </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback></>
 
                   );
                 } else {

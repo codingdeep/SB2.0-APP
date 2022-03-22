@@ -22,6 +22,7 @@ import {
     Appearance,
     useColorScheme,
 } from 'react-native-appearance';
+import MyBook from "./src/components/MyBook/MyBook";
 
 let chat = () => {
 };
@@ -225,12 +226,12 @@ export default class App extends Component {
         ) : (
             // <AppearanceProvider>
             <Provider store={store}>
-                <ChatComponent setChat={this.setChat}>
+                <Root><ChatComponent setChat={this.setChat}>
                     <NewAppReload reloadAppData={this.setApptEventListener}>
                         <Route status={this.state.status} getChat={this.getChat}
                                getAppt={this.getApptEventListener}/>
                     </NewAppReload>
-                </ChatComponent>
+                </ChatComponent></Root>
             </Provider>
             // </AppearanceProvider>
         );

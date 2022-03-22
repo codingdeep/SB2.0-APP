@@ -240,7 +240,6 @@ export const LogedInUserData = function* (action) {
 
     let Resut_Data_API = action.data
 
-    console.log('adiwshfoiwifw woefiwefwi sdfosidfo', Resut_Data_API)
 
     yield put({
       type: actionType.LOGINRESULT,

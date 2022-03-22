@@ -33,6 +33,7 @@ import ImagePicker from 'react-native-image-picker';
 import { useTheme } from '../../Theme/hooks'
 import { helperFunctions } from '../../_helpers';
 import { Appearance, AppearanceProvider } from 'react-native-appearance';
+import {Input} from "react-native-elements";
 const defaultMode = Appearance.getColorScheme() || 'light';
 const { colors } = useTheme()
 
@@ -63,9 +64,6 @@ class MyBook extends Component {
   }
 
   componentDidMount() {
-
-    console.log('PTRRRR',this.props)
-
     if(this.props.apptReload != undefined){
       this.props.apptReload().setRetrive(this.fcmApptReload)
     }
@@ -179,7 +177,6 @@ class MyBook extends Component {
     ///console.log("yyyyyonDateChanged", date, "ddddd", new Date());
 
     const { GetBookData } = this.state;
-    const marked = {};
     let selectedDay = date;
     let selectedDayData = {};
 
@@ -188,6 +185,7 @@ class MyBook extends Component {
     selectedDayData = Object.entries(GetBookData).filter(
       entries => entries[0] == selectedDay,
     );
+
     this.setState({
       selectedDayData: selectedDayData,
       date,
@@ -196,6 +194,7 @@ class MyBook extends Component {
     });
 
   };
+
 
   onMonthChange = (month, updateSource) => {
     //console.log("monthmonth", month);
@@ -465,6 +464,7 @@ class MyBook extends Component {
             {this.props.navigation.state.params != undefined ? (<HeaderComponent color={defaultMode === 'dark' ? 'white' : '#424E9C'} title="My Book" {...this.props} />) : (<HeaderComponent color={defaultMode === 'dark' ? 'white' : '#424E9C'} Left={"false"} title="My Book" {...this.props} />)}
 
           </View>
+
           <View style={{ flex: 8 }}>
             <View style={{ flex: 4 }}>
               <CalendarProvider

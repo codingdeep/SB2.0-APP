@@ -1395,7 +1395,7 @@ class Appointment extends Component {
                                             <TextInput
                                                 style={{
                                                     paddingHorizontal: 5,
-                                                    paddingVertical: 30,
+                                                    paddingVertical: 15,
                                                     color: helperFunctions.darkLightColor(),
                                                 }}
                                                 placeholder="Please enter note (max 1200 chars)"

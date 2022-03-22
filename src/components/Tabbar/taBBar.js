@@ -22,10 +22,11 @@ class TaBBar extends PureComponent {
         this.setState({
             actives: index
         })
+
         if(route.key == 'Clients') {
             if(route.index && route.index != 0){
                 this.props.navigation.navigate('Clients');
-                this.props.navigation.goBack();
+                //this.props.navigation.goBack();
             }else {
                 this.props.navigation.navigate('Clients');
             }
