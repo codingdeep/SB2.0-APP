@@ -32,6 +32,7 @@ export default class ChatComponent extends Component {
           return {};
         },
         setRetrive: _retrive => {
+
           self.state.retrive = _retrive;
         },
         getThreadList: () => {
@@ -69,20 +70,21 @@ export default class ChatComponent extends Component {
   }
 
   componentWillUnmount() {
-    console.log('Deactivated');
+    //console.log('Deactivated');
     this.state.exit = true;
   }
 
   chatRetriver = () => {
-    console.log('SSssssssssssssssss...');
+    //console.log('SSssssssssssssssss...');
     let self = this;
     let _r = async () => {
       if (!self.state.exit) {
-        console.log('Active');
+        //console.log('Active');
         if (self.state.retrive) {
-          console.log('Retriving...');
+          //console.log('Retriving...');
           if (this.state.getAllThreads) {
             let data = await _getAllThreads(self.state.locationId);
+            //console.log('thread data',data)
             self.state.threads = data.filter(item => {
               if (item.participants.length) return true;
               return false;
@@ -115,7 +117,7 @@ export default class ChatComponent extends Component {
   };
 
   render() {
-    console.log("mmmmmmbbmbb", this.props.children);
+    //console.log("mmmmmmbbmbb", this.props.children);
 
     return <>{this.props.children}</>;
   }

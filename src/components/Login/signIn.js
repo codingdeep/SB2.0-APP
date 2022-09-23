@@ -10,7 +10,8 @@ import {
     Alert,
     TouchableWithoutFeedback,
     ActivityIndicator,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Keyboard
 } from 'react-native';
 import { Container, Content, Form, Item, Input, Icon, Button } from 'native-base';
 import { helperFunctions } from "../../_helpers";
@@ -155,7 +156,7 @@ class SignIn extends Component {
         // await AsyncStorage.setItem(
         //   'LogInFirstTime',
         //   JSON.stringify("LogInFirstTime"))
-
+        Keyboard.dismiss();
         this.setState({
             loader: true,
         });

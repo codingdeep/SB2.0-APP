@@ -13,7 +13,7 @@ import {
   Toast,
 } from 'native-base';
 
-import { View, Text, TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import {View, Text, TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback, Alert} from 'react-native';
 import styles from './styles';
 import Moment from 'moment';
 import ImagePicker from 'react-native-image-picker';
@@ -184,13 +184,8 @@ class Schedule extends Component {
     return left
 }
 
-  checkNote=(note)=>{
-    Toast.show({
-      duration: 5000,
-      text: note,
-      buttonText: 'ok',
-    })
-
+  checkNote=(message)=>{
+    Alert.alert('Note: ', message);
   }
 
   render() {
@@ -288,7 +283,6 @@ class Schedule extends Component {
               </Grid>
               {this.props.value.length > 0 && this.props.value.map((value, i) => {
 
-
                 // let mainTime = Moment(new Date(value.start), ['h:mm A']).format(
                 //   'HH:mm',
                 // );
@@ -349,7 +343,12 @@ class Schedule extends Component {
 
                       </CardItem>
                         {value.staffNotes != undefined && value.staffNotes != '' &&
-                        <TouchableOpacity onPress={()=>this.checkNote(value.staffNotes)} style={{position:'absolute',top: 3,left:-4,backgroundColor:'red'}}>
+                        <TouchableOpacity onPress={()=>this.checkNote("Staff Note:\n" + value?.staffNotes)} style={{position:'absolute',top: -10,right:-4,backgroundColor:'red',zIndex: 1}}>
+                          <Text><AntIcon color="#fff" size={30} name="envelope"/></Text>
+                        </TouchableOpacity>
+                        }
+                        {value.customerNotes != undefined && value.customerNotes != '' &&
+                        <TouchableOpacity onPress={()=>this.checkNote("Customer Note:\n" + value?.customerNotes)} style={{position:'absolute',top: 3,left:-4,backgroundColor:'red',zIndex: 1}}>
                           <Text><AntIcon color="#fff" size={30} name="envelope"/></Text>
                         </TouchableOpacity>
                         }

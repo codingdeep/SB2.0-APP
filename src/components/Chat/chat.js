@@ -146,7 +146,7 @@ class Chat extends Component {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
   onClientSelect = async (val) => {
-    console.log("lllllll", val);
+    //console.log("lllllll", val);
 
     const { AllClientsData } = this.state;
 
@@ -174,7 +174,7 @@ class Chat extends Component {
               self.props.chat().getThreadList();
             }
           );
-          console.log(data);
+          //console.log(data);
         }
       }
     });
@@ -182,6 +182,7 @@ class Chat extends Component {
   };
 
   getAllThreads = async (data) => {
+    //console.log('all threads',data)
     for (let i = 0; i < data.length; i++) {
       let thread = data[i];
       if (
@@ -195,7 +196,7 @@ class Chat extends Component {
         data[i]['new'] = false;
       }
     }
-    console.log('timeMsg', data);
+    //console.log('timeMsg', data);
 
     this.setState({ enableChat: true, threadList: data });
   };

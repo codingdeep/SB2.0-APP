@@ -219,7 +219,7 @@ export default class App extends Component {
 
     render() {
         let colorScheme = Appearance.getColorScheme();
-        console.log(apptReload())
+        //console.log(apptReload())
 
         return this.state.loading == true ? (
             <Loader/>
@@ -249,24 +249,24 @@ messaging1
         //   .then(() => console.log('Subscribed to topic!'));
 
 
-        console.log('tokentoken00', enabled);
+        //console.log('tokentoken00', enabled);
         if (enabled) {
             // const fcmToken = ReturnFcmToken();
-            console.log('tokentoken', "hhhhhh");
+            //console.log('tokentoken', "hhhhhh");
 
 
             messaging1
                 .getToken()
                 .then(token => {
-                    console.log('tokentoken', token);
+                    //console.log('tokentoken', token);
                 })
                 .catch(error => {
-                    console.log('tokentokeneeee', error);
+                    //console.log('tokentokeneeee', error);
                     /* handle error */
                 });
         } else {
             // const fcmToken = ReturnFcmToken();
-            console.log('tokentokenElse', "dddd");
+            //console.log('tokentokenElse', "dddd");
             messaging1
                 .requestPermission()
                 .then(() => {
@@ -285,19 +285,19 @@ messaging1
 PushNotification.configure({
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: function (token) {
-        console.log('TOKEN:', token);
+        //console.log('TOKEN:', token);
     },
     // (required) Called when a remote or local notification is opened or received
     onNotification: function (notification) {
-        console.log('notification1', notification);
-        console.log('NOTIFICATION:', notification);
+        //console.log('notification1', notification);
+        //console.log('NOTIFICATION:', notification);
         if (notification.title == "Appointment CheckIn") {
-            console.log("remoteMessage", notification);
+            //console.log("remoteMessage", notification);
             Vibration.vibrate()
         }
-        //console.log(apptReload().getRetrive())
+        //console.log('notifysrfsrfsfsf=====', apptReload().getRetrive())
         if (notification.data != null && notification.data.bookedTime != null && apptReload() != null && apptReload().getRetrive() != null) {
-            console.log('wedsfsdf', apptReload().getRetrive())
+            //console.log('wedsfsdf', apptReload().getRetrive())
             apptReload().getRetrive()(
                 notification.data
             );
@@ -305,7 +305,7 @@ PushNotification.configure({
 
 
         if (notification.type && notification.type == 'chat') {
-            console.log('MESSAGEEEEEE', chat().getOnNewMessageThreadListner);
+           // console.log('MESSAGEEEEEE', chat().getOnNewMessageThreadListner);
 
             if (chat().getOnNewMessageThreadListner() != null) {
                 chat().getOnNewMessageThreadListner()(
@@ -313,12 +313,12 @@ PushNotification.configure({
                     JSON.parse(notification.message_body),
                 );
             }
-            if (chat().getOnNewMessageThreadListListner() != null) {
-                chat().getOnNewMessageThreadListListner()(
-                    notification.threadId,
-                    JSON.parse(notification.message_body),
-                );
-            }
+            // if (chat().getOnNewMessageThreadListListner() != null) {
+            //     chat().getOnNewMessageThreadListListner()(
+            //         notification.threadId,
+            //         JSON.parse(notification.message_body),
+            //     );
+            // }
         }
 
         // process the notification
