@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {Container, Label} from 'native-base';
+import { Container, Fab, Label } from "native-base";
 import styles from './styles';
 import {connect} from 'react-redux';
 import {GetAllClients} from '../../Redux/Action/ClientsAction';
@@ -153,16 +153,23 @@ class clientsProfile extends Component {
     // <Item title={item} />
     const {AllClientsData, ClientsLoader} = this.props;
     //console.log('PROPS', AllClientsData);
-
     // console.log('this.props', AllClientsData);
     return ClientsLoader == false ? (
       <LOADER />
     ) : (
-      <Fragment>
-        <Container style={[styles.pro_background,{...helperFunctions.whiteToDark()}]}>
+      <>
+        <Container style={[styles.pro_background,{...helperFunctions.whiteToDark(),flex: 1}]}>
           <View style={{justifyContent: 'center', ...helperFunctions.headerHeight()}}>
             <HeaderComponent color={defaultMode === 'dark' ? 'white' : '#424E9C'} Left={'false'} title="Clients" {...this.props} />
           </View>
+          <Fab
+            direction="up"
+            containerStyle={{}}
+            style={{backgroundColor: '#5067FF',zIndex: 1}}
+            position="bottomRight"
+            onPress={() => this.setState({active: !this.state.active})}>
+            <Text>h</Text>
+          </Fab>
           <View style={{flex: 1}}>
             <Search
               businessId={this.props.businessId}
@@ -170,6 +177,7 @@ class clientsProfile extends Component {
                 this.searchClient(res);
               }}
             />
+
           </View>
           <View style={{flex: 7.5}}>
             <FlatList
@@ -263,7 +271,7 @@ class clientsProfile extends Component {
           </Modal>
           <View style={{height: 150}}></View>
         </Container>
-      </Fragment>
+      </>
     );
   }
 

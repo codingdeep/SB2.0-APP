@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import React, {Component, useEffect} from 'react';
 import {Alert, PermissionsAndroid, Vibration} from 'react-native';
 import {Provider} from 'react-redux';
@@ -53,14 +52,10 @@ export default class App extends Component {
 
             const LogInFirstTime = await AsyncStorage.getItem('LogInFirstTime');
             await AsyncStorage.removeItem('LogInFirstTime');
-
             const value = await AsyncStorage.getItem('User@Data');
-
-            console.log('VALUE', value);
             if (value !== null) {
 
                 let data = JSON.parse(value);
-                console.log("kkkkhhhhh", data);
 
                 data.logStatus == true
                     ? this.setState({

@@ -334,7 +334,7 @@ class nav extends Component {
   }
   render() {
 
-    console.log("this.conditionalMenu()", this.props.role);
+    //console.log("this.conditionalMenu()", this.props.role);
 
     return (this.conditionalMenu() == true) ? <App /> : <AppWithNotBookAble />;
     // return this.props.compensationStrategy == "Commission" ? <AppWithCommission /> : <App />;
@@ -344,8 +344,8 @@ class nav extends Component {
 
 
 const mapStateProps = state => {
-  console.log("StoreAllInfo555555", state.StoreDataReducer.StoreAllData);
-  console.log("StoreAllInfo555555", state.LoggedData);
+  //console.log("StoreAllInfo555555", state.StoreDataReducer.StoreAllData);
+  //console.log("StoreAllInfo555555", state.LoggedData);
 
   const compensationStrategy = state.LoggedData.AllLogedUserData.technicianResponsibilities[0].compensationStrategy;
   const role = state.LoggedData.AllLogedUserData.role

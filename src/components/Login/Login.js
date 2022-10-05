@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Container, Content, Form, Item, Input, Icon, Button } from 'native-base';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Container, Content, Form, Item, Input, Icon, Button} from 'native-base';
+import {connect} from 'react-redux';
 import {
   StatusBar,
   Text,
@@ -10,7 +10,7 @@ import {
   Alert,
   KeyboardAvoidingView,
 } from 'react-native';
-import { Log_in_checker } from '../../Redux/Action/LogIn';
+import {Log_in_checker} from '../../Redux/Action/LogIn';
 import styles from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
 import CusIconDesign from '../../Assets/Icon/IconAntDesign';
@@ -27,7 +27,7 @@ class LogIn extends Component {
       loader: false,
     };
   }
-  componentDidMount() { }
+  componentDidMount() {}
   _Login() {
     // await AsyncStorage.setItem(
     //   'LogInFirstTime',
@@ -70,9 +70,8 @@ class LogIn extends Component {
   render() {
     // this.props.navigation.state.routeName
 
-
     return (
-      <KeyboardAvoidingView style={{ flex: 1, paddingHorizontal: 45 }}>
+      <KeyboardAvoidingView style={{flex: 1, paddingHorizontal: 45}}>
         <StatusBar hidden />
 
         <View style={styles.loginView}>
@@ -85,7 +84,7 @@ class LogIn extends Component {
                 placeholder="Salon ID"
                 placeholderTextColor="#B9B9B9"
                 value={this.state.salon_id}
-                onChangeText={e => this.setState({ salon_id: e })}
+                onChangeText={(e) => this.setState({salon_id: e})}
               />
               <Image
                 resizeMode="stretch"
@@ -96,7 +95,7 @@ class LogIn extends Component {
               {/* <Thumbnail square small source={} /> */}
             </Item>
 
-            <View style={{ height: 25 }} />
+            <View style={{height: 25}} />
             <Item regular style={styles.itemSalonId}>
               <Input
                 // style={{ width: "80%" }}
@@ -104,7 +103,7 @@ class LogIn extends Component {
                 placeholder="Username"
                 placeholderTextColor="#B9B9B9"
                 value={this.state.user_name}
-                onChangeText={e => this.setState({ user_name: e })}
+                onChangeText={(e) => this.setState({user_name: e})}
               />
               {/* <View style={{ width: 25, height: 25 }}> */}
               <CusIconDesign
@@ -122,15 +121,15 @@ class LogIn extends Component {
               /> */}
               {/* </View> */}
             </Item>
-            <View style={{ height: 25 }} />
+            <View style={{height: 25}} />
             <Item regular style={styles.itemSalonId}>
               <Input
-                style={{ width: '80%' }}
+                style={{width: '80%'}}
                 placeholder="Password"
                 secureTextEntry={true}
                 placeholderTextColor="#B9B9B9"
                 value={this.state.password}
-                onChangeText={e => this.setState({ password: e })}
+                onChangeText={(e) => this.setState({password: e})}
               />
               <CusIconDesign
                 IconFrom="SimpleLineIcons"
@@ -162,20 +161,19 @@ class LogIn extends Component {
               {this.state.loader == true ? (
                 <ActivityIndicator size="small" color="#424E9C" />
               ) : (
-                  <Text
-                    style={{
-                      color: '#424E9C',
-                      fontSize: 18,
-                      fontWeight: '700',
-                      width: '100%',
-                      textAlign: 'center',
-                    }}>
-                    Log In
+                <Text
+                  style={{
+                    color: '#424E9C',
+                    fontSize: 18,
+                    fontWeight: '700',
+                    width: '100%',
+                    textAlign: 'center',
+                  }}>
+                  Log In
                 </Text>
-                )}
+              )}
             </Button>
           </View>
-
           <View style={styles.line}>
             <View
               style={{
@@ -192,7 +190,9 @@ class LogIn extends Component {
   }
 }
 
-const mapStateProps = state => {
+
+
+const mapStateProps = (state) => {
   const loader = state.LoggedData.loader;
   const errorMsg = state.LoggedData.errorMsg;
   return {
