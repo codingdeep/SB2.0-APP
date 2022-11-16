@@ -4,8 +4,6 @@ import {
     Text,
     Alert,
     View,
-    ImageBackground,
-    Image,
     TextInput,
     TouchableOpacity,
     ScrollView,
@@ -15,17 +13,11 @@ import {
 import {
     Left,
     Right,
-    Item,
-    Body,
-    Icon,
-    Row,
     ListItem,
     List,
     Thumbnail,
-    Badge,
     Col,
     Label,
-    Picker,
     Container,
     Form,
     Textarea,
@@ -35,7 +27,6 @@ import HeaderComponent from '../Header/header';
 import Moment from 'moment';
 import styles from './styles';
 import {connect} from 'react-redux';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import MiniModal from '../Modal/miniModal';
 import {
     saveBooking,
@@ -44,17 +35,10 @@ import {
     DeleteService,
     updateBooking,
 } from './../../Redux/SagaActions/UpcommingAppoinments_action';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {GetSearchClient} from './../../Redux/SagaActions/AppoinmentsSagaAction.js';
 import CustomDateTimePicker from '../ImportantFunction/datePicker';
-import CellPhoneNumFormat from '../ImportantFunction/cellPhoneNumFormat';
-import DecimalFormat from '../ImportantFunction/decimalFormat';
 import {toast} from '../Toast/Toast';
 import {helperFunctions} from '../../_helpers';
 import Modal from 'react-native-modal';
-import StoreDataReducer from '../../Redux/Reducer/StoreDataReducer';
-import {_requestSingleService} from '../../Redux/SagaActions/ServiceAndProductSagaAction';
-import Details from '../ClientsProfile/details';
 import AddEditServices from '../Modal/addEditServices';
 import AddEditProducts from '../Modal/addEditProducts';
 import moment from 'moment';
@@ -63,10 +47,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {_requestToPasrAppoApi} from '../../Redux/SagaActions/AppoinmentsSagaAction';
 import ActionSheet from '../ActionSheet/actionSheet';
 import Animated from 'react-native-reanimated';
-import {TapGestureHandler, State} from 'react-native-gesture-handler';
+import { State} from 'react-native-gesture-handler';
 import {withTransition} from 'react-native-redash';
 import Feather from 'react-native-vector-icons/Feather';
-import {Appearance, AppearanceProvider} from 'react-native-appearance';
+import {Appearance} from 'react-native-appearance';
 import {updateCustomerNote} from '../../Redux/SagaActions/UpcommingAppoinments_action'
 import Items from './items'
 

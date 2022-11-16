@@ -1,13 +1,14 @@
 /* eslint-disable */
-import React, {Component} from 'react';
-import {Body, Title, Button, Left, Right} from 'native-base';
-import {StatusBar, View, Image, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { Body, Title, Button, Left, Right } from 'native-base';
+import { StatusBar, View, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import CusIconDesign from '../../Assets/Icon/IconAntDesign';
 // ...
 const customHeader = props => {
+  console.log(props);
   return (
-    <View style={{flex: 1, justifyContent: 'center', marginHorizontal: 20, height: 30}}>
+    <View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 20, height: 30 }}>
       <StatusBar hidden />
       <View
         style={{
@@ -15,7 +16,7 @@ const customHeader = props => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <View style={{width: '20%'}}>
+        <View style={{ width: '20%' }}>
           {props.Left != 'false' && (
             <Button transparent onPress={() => props.navigation.goBack()}>
               <View
@@ -52,7 +53,7 @@ const customHeader = props => {
             <Title
               style={
                 props.color
-                  ? [styles.headerTitle, {color: props.color}]
+                  ? [styles.headerTitle, { color: props.color }]
                   : styles.headerTitle
               }>
               {props.title}
@@ -60,21 +61,21 @@ const customHeader = props => {
           )}
         </View>
 
-        <View style={{width: '20%'}}>
+        <View style={{ width: '20%' }}>
           <TouchableOpacity
             style={styles.right}
             onPress={() => props.onFunctionCall()}>
-            {props.rightTitle && props.rightTitle != null &&  (
-              <Title style={props.color ? [styles.textStyle, {color: props.color}] : styles.textStyle }>{props.rightTitle}</Title>
+            {props.rightTitle && props.rightTitle != null && (
+              <Title style={props.color ? [styles.textStyle, { color: props.color }] : styles.textStyle}>{props.rightTitle}</Title>
             )}
             {props.rightImg && (
-                <CusIconDesign
-                    IconFrom="AntDesign"
-                    name="plus"
-                    textAlign="right"
-                    color={props.color}
-                    size={25}
-                />
+              <CusIconDesign
+                IconFrom="AntDesign"
+                name="plus"
+                textAlign="right"
+                color={props.color}
+                size={25}
+              />
             )}
           </TouchableOpacity>
         </View>

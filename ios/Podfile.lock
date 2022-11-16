@@ -159,7 +159,7 @@ PODS:
   - nanopb/encode (0.3.9011)
   - OpenSSL-Universal (1.1.180)
   - PromisesObjC (1.2.12)
-  - Protobuf (3.21.6)
+  - Protobuf (3.21.9)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
     - FBLazyVector (= 0.62.2)
@@ -648,7 +648,7 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  Protobuf: e7846f61e8542750cf311385fc633c1d00928f9f
+  Protobuf: 02524ec14183fe08fb259741659e79683788158b
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3

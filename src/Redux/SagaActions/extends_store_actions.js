@@ -29,7 +29,7 @@ export const _requestToApi = businessId =>
 
 export const StoreData = function* (action) {
   try {
-    console.log("1112212121212");
+    //console.log("1112212121212");
 
     // action.nav.navigate('SELECTLOCATION');
     const requestDataApi = yield call(_requestToApi, action.BusinessId);

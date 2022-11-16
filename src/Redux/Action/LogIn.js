@@ -13,7 +13,6 @@ export function Log_in_checker(Username, Password, authData, nav) {
   };
 }
 export function AlredyLogedInUser(data) {
-  console.log("AlredyLogedInUser", data);
 
   return {
 

@@ -180,7 +180,6 @@ class MyBook extends Component {
     let selectedDay = date;
     let selectedDayData = {};
 
-    //console.log("yyyyyGetBookData", GetBookData, "55555", date);
 
     selectedDayData = Object.entries(GetBookData).filter(
       entries => entries[0] == selectedDay,
@@ -449,11 +448,6 @@ class MyBook extends Component {
   render() {
     let self = this;
     const { GetBookData, BookLoader, selectedDayData } = this.state;
-
-
-    console.log('GetBookData',GetBookData)
-
-
 
 
     return BookLoader == undefined ? (

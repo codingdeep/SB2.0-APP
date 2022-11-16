@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Text,
   View,
@@ -9,16 +9,16 @@ import {
 } from 'react-native';
 import { Container, Fab, Label } from "native-base";
 import styles from './styles';
-import {connect} from 'react-redux';
-import {GetAllClients} from '../../Redux/Action/ClientsAction';
+import { connect } from 'react-redux';
+import { GetAllClients } from '../../Redux/Action/ClientsAction';
 import LOADER from '../Loader/Loader';
 import Search from './search';
 import HeaderComponent from '../Header/header';
 import RefreshFooter from '../ImportantFunction/refreshFooter';
-import {GetClientsNextPage} from '../../Redux/SagaActions/clients_saga_action';
-import {Appearance, AppearanceProvider} from 'react-native-appearance';
+import { GetClientsNextPage } from '../../Redux/SagaActions/clients_saga_action';
+import { Appearance, AppearanceProvider } from 'react-native-appearance';
 const defaultMode = Appearance.getColorScheme() || 'light';
-import {helperFunctions} from '../../_helpers';
+import { helperFunctions } from '../../_helpers';
 import Modal from 'react-native-modal';
 import Details from '../ClientsProfile/details';
 class clientsProfile extends Component {
@@ -38,12 +38,12 @@ class clientsProfile extends Component {
       this.state.load = true;
     }, 500);
     this.navigationWillFocusListener = props.navigation.addListener(
-        "willFocus",
-        () => {
+      "willFocus",
+      () => {
 
-          //this.state.item != '' && this.toggleModal(this.state.item);
+        //this.state.item != '' && this.toggleModal(this.state.item);
 
-        }
+      }
     );
   }
 
@@ -55,7 +55,7 @@ class clientsProfile extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const {ClientsLoader} = props;
+    const { ClientsLoader } = props;
 
     return {
       // tasksValue: AllClientsData,
@@ -78,7 +78,7 @@ class clientsProfile extends Component {
     }
     this.state.load = false;
     let offSet = this.state.offSet + 1;
-    this.setState({footerLoading: true});
+    this.setState({ footerLoading: true });
     //console.log('adsfasfasfd');
     GetClientsNextPage(
       this.props.businessId,
@@ -128,11 +128,11 @@ class clientsProfile extends Component {
   // };
   gotoBookAppointment = item => {
     this.closeModal();
-    this.props.navigation.navigate('MyBook', {ClientInfo: item});
+    this.props.navigation.navigate('MyBook', { ClientInfo: item });
   };
   getAllFormula = item => {
     this.closeModal();
-    this.props.navigation.navigate('FormulaListScreen', {ClientInfo: item});
+    this.props.navigation.navigate('FormulaListScreen', { ClientInfo: item });
   };
   getUpcomingAppt = item => {
     this.closeModal();
@@ -151,26 +151,18 @@ class clientsProfile extends Component {
 
   render() {
     // <Item title={item} />
-    const {AllClientsData, ClientsLoader} = this.props;
+    const { AllClientsData, ClientsLoader } = this.props;
     //console.log('PROPS', AllClientsData);
     // console.log('this.props', AllClientsData);
     return ClientsLoader == false ? (
       <LOADER />
     ) : (
       <>
-        <Container style={[styles.pro_background,{...helperFunctions.whiteToDark(),flex: 1}]}>
-          <View style={{justifyContent: 'center', ...helperFunctions.headerHeight()}}>
+        <Container style={[styles.pro_background, { ...helperFunctions.whiteToDark(), flex: 1 }]}>
+          <View style={{ justifyContent: 'center', ...helperFunctions.headerHeight() }}>
             <HeaderComponent color={defaultMode === 'dark' ? 'white' : '#424E9C'} Left={'false'} title="Clients" {...this.props} />
           </View>
-          <Fab
-            direction="up"
-            containerStyle={{}}
-            style={{backgroundColor: '#5067FF',zIndex: 1}}
-            position="bottomRight"
-            onPress={() => this.setState({active: !this.state.active})}>
-            <Text>h</Text>
-          </Fab>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <Search
               businessId={this.props.businessId}
               getSearchClients={res => {
@@ -179,7 +171,7 @@ class clientsProfile extends Component {
             />
 
           </View>
-          <View style={{flex: 7.5}}>
+          <View style={{ flex: 7.5, zIndex: -1 }}>
             <FlatList
               data={
                 this.state.AllClientsData
@@ -188,7 +180,7 @@ class clientsProfile extends Component {
               }
               keyExtractor={(item, index) => item + index}
               // renderItem={({ item }) => <Item title={item} />}
-              renderItem={({item}) => {
+              renderItem={({ item }) => {
                 return (
                   <View>
                     <TouchableOpacity onPress={() => this.toggleModal(item)}>
@@ -197,7 +189,7 @@ class clientsProfile extends Component {
                           <View style={styles.firstBlock}>
                             <Image
                               style={styles.avater}
-                              source={{uri: item.imageUrl}}
+                              source={{ uri: item.imageUrl }}
                             />
                           </View>
                           <View style={styles.secondBlock}>
@@ -218,7 +210,7 @@ class clientsProfile extends Component {
                             </Text>
 
                             {item.lastVisit && (
-                              <Text style={{...helperFunctions.yellowColor()}}>
+                              <Text style={{ ...helperFunctions.yellowColor() }}>
                                 {item.lastVisit.readableBookedTime}
                               </Text>
                             )}
@@ -234,7 +226,7 @@ class clientsProfile extends Component {
                               <View style={styles.daysBox}>
                                 <Text
                                   numberOfLines={1}
-                                  style={{...styles.daysNextIn,...helperFunctions.yellowColor()}}>
+                                  style={{ ...styles.daysNextIn, ...helperFunctions.yellowColor() }}>
                                   Next: {item.nextVisit.readableBookedTime}
                                 </Text>
                               </View>
@@ -257,7 +249,7 @@ class clientsProfile extends Component {
           </View>
 
           <Modal
-            style={{margin: 0}}
+            style={{ margin: 0 }}
             backgroundColor="white"
             isVisible={this.state.isModalVisible}>
             <Details
@@ -269,7 +261,7 @@ class clientsProfile extends Component {
               gotoBook={this.gotoBookAppointment}
             />
           </Modal>
-          <View style={{height: 150}}></View>
+          <View style={{ height: 150 }}></View>
         </Container>
       </>
     );

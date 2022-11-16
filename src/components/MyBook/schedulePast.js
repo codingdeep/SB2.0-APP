@@ -29,7 +29,6 @@ const Schedule = props => {
 
 
     const { value } = props
-    console.log("value5555", value)
     return (
         <View style={{}}>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -39,16 +38,6 @@ const Schedule = props => {
                         {Moment(value.start).format("hh:mm A")}
                     </Text>
                 </View>
-
-                {/* <View style={{ justifyContent: "flex-end", flexDirection: "row" }}>
-          <TouchableOpacity rounded onPress={() => alert('Add payment')} transparent>
-            <Image source={require('../../Assets/myBook/ic-contact-edit.png')} style={styles.inputIcon} />
-          </TouchableOpacity>
-          <Label style={{ width: 20 }} />
-          <TouchableOpacity rounded onPress={() => alert('Add payment')} transparent>
-            <Image source={require('../../Assets/myBook/ic-actions-calendar.png')} style={styles.inputIcon} />
-          </TouchableOpacity>
-        </View> */}
             </View>
 
             <Card >

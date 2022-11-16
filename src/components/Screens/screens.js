@@ -103,24 +103,24 @@ const clientsStack = createStackNavigator(
   },
 );
 
-clientsStack.navigationOptions = ({navigation}) => {
-    let tabBarVisible = true;
-    for (let i = 0; i < navigation.state.routes.length; i++) {
-        switch (navigation.state.routes[i].routeName) {
-            case 'Appointment':
-            case 'AppointmentBook':
-            case 'EditAppointment':
-            case 'AddEditServiceBook':
-            case 'MyBook':
-                tabBarVisible = false;
-                break;
-            default:
-                tabBarVisible = true;
-        }
+clientsStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  for (let i = 0; i < navigation.state.routes.length; i++) {
+    switch (navigation.state.routes[i].routeName) {
+      case 'Appointment':
+      case 'AppointmentBook':
+      case 'EditAppointment':
+      case 'AddEditServiceBook':
+      case 'MyBook':
+        tabBarVisible = false;
+        break;
+      default:
+        tabBarVisible = true;
     }
-    return {
-        tabBarVisible
-    }
+  }
+  return {
+    tabBarVisible
+  }
 };
 
 
@@ -217,22 +217,22 @@ const My_book = createStackNavigator(
   },
 );
 
-My_book.navigationOptions = ({navigation}) => {
-    let tabBarVisible = true;
-    for (let i = 0; i < navigation.state.routes.length; i++) {
-        switch (navigation.state.routes[i].routeName) {
-            case 'AddEditServiceBook':
-            case 'AppointmentBook':
-            case 'AddPaymentMethod':
-                tabBarVisible = false;
-                break;
-            default:
-                tabBarVisible = true;
-        }
+My_book.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  for (let i = 0; i < navigation.state.routes.length; i++) {
+    switch (navigation.state.routes[i].routeName) {
+      case 'AddEditServiceBook':
+      case 'AppointmentBook':
+      case 'AddPaymentMethod':
+        tabBarVisible = false;
+        break;
+      default:
+        tabBarVisible = true;
     }
-    return {
-        tabBarVisible
-    }
+  }
+  return {
+    tabBarVisible
+  }
 };
 
 
@@ -326,7 +326,7 @@ class nav extends Component {
     let isTech = result[0].technicians.filter(tech => {
 
       if (tech.id == this.props.TechnicianId && tech.bookable == true) {
-          console.log('wdwed',tech)
+        console.log('wdwed', tech)
         bookable = true
       }
     })

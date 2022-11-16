@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { Component } from 'react';
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React, {Component} from 'react';
+import {createSwitchNavigator, createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import Screens from '../components/Screens';
 import SplashScreen from '../components/Splash';
 import Login from '../components/Login';
@@ -18,34 +18,31 @@ import SelectStore from '../components/Store';
 import AddEditFormula from '../components/AddEditFormula/index';
 import PastAppointments from '../components/PastAppointments/index';
 import SelectLocation from '../components/SelectLocaton/index';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Reminder from '../components/Reminder/index';
 
 import Activites from '../components/Activites/index';
 
-
 import ChatView from '../components/ChatView/chatView';
 import Appointment from '../components/AddEditService';
 import SignIn from '../components/Login/signIn';
+import SignUp from "../components/Signup/SignUp";
 
 let chat = null;
-let ApptReload = null
+let ApptReload = null;
 class nav extends Component {
   constructor(props) {
     super(props);
     chat = props.getChat;
     ApptReload = props.getAppt;
-      console.log("APTRELOA",ApptReload)
   }
 
   render() {
-    console.log("this.props.status", this.props.status);
-
     return this.props.status === false ? (
       <AuthStackContainer />
     ) : (
-        <AppStackAppContainer />
-      );
+      <AppStackAppContainer />
+    );
   }
 }
 // For all authentication
@@ -57,6 +54,9 @@ const AuthStack = createStackNavigator(
     LOGIN: {
       screen: SignIn,
     },
+    REGISTER: {
+      screen: SignUp,
+    },
   },
   {
     headerMode: 'none',
@@ -66,19 +66,24 @@ const AuthStack = createStackNavigator(
 // For Successfully Login user
 const AppStack = createStackNavigator(
   {
-
     // SPLASHSCREEN: {
     //   screen: SplashScreen,
     // },
     SELECTLOCATION: {
-      screen: props => <SelectLocation {...props} chat={chat} apptReload={ApptReload} />,
+      screen: (props) => (
+        <SelectLocation {...props} chat={chat} apptReload={ApptReload} />
+      ),
     },
     SELECTSTORE: {
-      screen: props => <SelectStore {...props} chat={chat} apptReload={ApptReload} />,
+      screen: (props) => (
+        <SelectStore {...props} chat={chat} apptReload={ApptReload} />
+      ),
     },
 
     Screens: {
-      screen: props => <Screens {...props} chat={chat} apptReload={ApptReload} />,
+      screen: (props) => (
+        <Screens {...props} chat={chat} apptReload={ApptReload} />
+      ),
     },
     PROFILE: {
       screen: Profile,
@@ -97,7 +102,7 @@ const AppStack = createStackNavigator(
       screen: TodayScreen,
     },
     Chat: {
-      screen: props => <Chat {...props} chat={chat} />,
+      screen: (props) => <Chat {...props} chat={chat} />,
     },
     CLIENTSDETAILS: {
       screen: ClinetsDetails,
@@ -160,8 +165,7 @@ const AppStackAppContainer = createAppContainer(
   ),
 );
 
-const mapStateProps = state => {
-
+const mapStateProps = (state) => {
   return {};
 };
 

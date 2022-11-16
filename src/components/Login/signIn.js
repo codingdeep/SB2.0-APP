@@ -11,7 +11,7 @@ import {
   TouchableWithoutFeedback,
   ActivityIndicator,
   KeyboardAvoidingView,
-  Keyboard, TouchableOpacity,
+  Keyboard, TouchableOpacity, StatusBar,
 } from "react-native";
 import { Container, Content, Form, Item, Input, Icon, Button } from "native-base";
 import { helperFunctions } from "../../_helpers";
@@ -20,6 +20,7 @@ import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
 import { Log_in_checker } from "../../Redux/Action/LogIn";
 import CusIconDesign from "../../Assets/Icon/IconAntDesign";
+import { BaseApi } from "../../components/ImportantFunction/baseApi";
 
 const { width, height } = Dimensions.get("window");
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -53,7 +54,7 @@ function runTiming(clock, value, dest) {
     time: new Value(0),
     frameTime: new Value(0),
     rubel: "",
-
+    devMode: 'inactive',
   };
 
   const config = {
@@ -107,6 +108,17 @@ class SignIn extends Component {
 
     ]);
 
+
+    this.changeState = event([
+      {
+        nativeEvent: ({ state }) =>
+          block([cond(
+            eq(state, State.END),
+          )]),
+      },
+    ]);
+
+
     this.onCloseState = event([
       {
         nativeEvent: ({ state }) =>
@@ -153,6 +165,12 @@ class SignIn extends Component {
 
   }
 
+  componentDidMount = async () => {
+    let response = await fetch(BaseApi + "meta/public-settings");
+    let lockedDown = await response.json();
+    this.setState({ devMode: lockedDown.lock_down_mode, salon_id: lockedDown.lock_down_mode === 'active' ? 2 : '' });
+  };
+
   _Login() {
     Keyboard.dismiss();
     this.setState({
@@ -193,6 +211,7 @@ class SignIn extends Component {
   render() {
     return (
       <Container>
+        <StatusBar hidden/>
         <View style={styles.container}>
           <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
             <Image style={{ flex: 1, width: null, height: null }} source={require("../../Assets/sm3.jpg")} />
@@ -212,6 +231,21 @@ class SignIn extends Component {
                   <Text style={{ fontSize: 20, fontWeight: "bold", color: "#000" }}>SIGN IN</Text>
                 </Animated.View>
               </TapGestureHandler>
+              {this.state.devMode == "active" &&
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("REGISTER")}
+                                  onHandlerStateChange={this.changeState}>
+                  <Animated.View style={{
+                    ...styles.button,
+                    opacity: this.buttonOpacity,
+                    transform: [{ translateY: this.buttonY }],
+                    backgroundColor: "rgba(255,255,255,.5)",
+                    borderColor: "white",
+                    borderWidth: 1,
+                  }}>
+                    <Text style={{ fontSize: 20, fontWeight: "bold", color: "#000" }}>REGISTRATION</Text>
+                  </Animated.View>
+                </TouchableOpacity>
+              }
 
               <Animated.View style={{
                 height: height / 2.5,
@@ -231,6 +265,7 @@ class SignIn extends Component {
                     }}>X</Animated.Text>
                   </Animated.View>
                 </TapGestureHandler>
+                {this.state.devMode !== "active" &&
                 <Item regular style={{
                   ...styles.textInput, ...helperFunctions.lightDarkBg(),
                   borderBottomColor: helperFunctions.lightAss(),
@@ -246,7 +281,7 @@ class SignIn extends Component {
                   <Feather name="check-circle" color="#999999" size={20} />
 
                   {/* <Thumbnail square small source={} /> */}
-                </Item>
+                </Item> }
                 <Item regular style={{
                   ...styles.textInput, ...helperFunctions.lightDarkBg(),
                   borderBottomColor: helperFunctions.lightAss(),
@@ -338,6 +373,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     ...helperFunctions.deviceWiseWidth(300, 300, 250, 250),
     alignSelf: "center",
+    marginVertical: 5,
   },
   closeButton: {
     height: 40,

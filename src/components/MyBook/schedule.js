@@ -29,6 +29,7 @@ const DEFAULT_HEIGHT = 150;
 const { width } = Dimensions.get('window')
 
 const Times = [
+
   {
     hour: '08:00:00',
     hourEnd: '08:59:59',
@@ -252,7 +253,6 @@ class Schedule extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start'
 
-
                   }}>
 
                     <View style={{...helperFunctions.flexRow(),width: 100,height:'100%',...helperFunctions.assMediumDark()}}>
@@ -332,13 +332,6 @@ class Schedule extends Component {
                           <Text style={{fontSize: 11, color: value.textColor }}>
                             {value.title}
                           </Text>
-                          {/*<View>*/}
-                          {/*  {value.status != 'Checked Out' && (*/}
-                          {/*    <Text style={{...helperFunctions.smallFont(), color: value.textColor}}>*/}
-                          {/*      {value.status}*/}
-                          {/*    </Text>*/}
-                          {/*  )}*/}
-                          {/*</View>*/}
                         </View>
 
                       </CardItem>

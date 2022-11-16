@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case actionType.LOGINRESULT:
-      console.log('AC',action)
+      //console.log('AC',action)
 
       return {
         ...state,

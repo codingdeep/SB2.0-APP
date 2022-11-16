@@ -47,7 +47,7 @@ export const _requestToUpcomingDataApi = async (locationId, cliendId) => {
 };
 
 export const _saveBooking = async body => {
-  console.log('asdfs',body)
+  console.log('asdfs', body)
   const AuthHeader = await authHeader();
   const requestOptions = {
     method: 'POST',
@@ -110,10 +110,10 @@ export const _checkServiceOut = async (vt, amount) => {
   const requestOptions = {
     method: 'PUT',
     headers: AuthHeader,
-    body: JSON.stringify({chargeAmount: amount}),
+    body: JSON.stringify({ chargeAmount: amount }),
   };
   console.log(requestOptions)
-  return fetch(apiPath+'visit-technicians/'+vt, requestOptions).then(handleResponse);
+  return fetch(apiPath + 'visit-technicians/' + vt, requestOptions).then(handleResponse);
 }
 
 
@@ -163,7 +163,7 @@ export const _updateCustomerNote = async (apptId, body) => {
   };
 
   try {
-    return fetch(apiPath + 'visits/update/' + apptId+"/notes", requestOptions)
+    return fetch(apiPath + 'visits/update/' + apptId + "/notes", requestOptions)
       .then(response => {
         console.log(response)
         if (response.status == 401 || response.status == 403) {
@@ -482,7 +482,7 @@ export const _deleteProduct = async (id) => {
 
 export const saveBooking = async (payload, success, error) => {
 
-  console.log('payload',payload)
+  console.log('payload', payload)
 
   var tech = [];
   var purchaseItems = []
@@ -596,7 +596,7 @@ export const updateService = async (id, payload, success, error) => {
 };
 
 export const DeleteService = async (visitID, cancellaTionReason, success, error) => {
-  console.log('visit',visitID)
+  console.log('visit', visitID)
 
   try {
     const response = await _deleteService(visitID, cancellaTionReason);
@@ -680,7 +680,7 @@ export const GetServiceInfo = async (servicrId, success, error) => {
 
 
 
-export const UpcommingAppoinments = function* (action) {
+export const UpcommingAppoinments = function*(action) {
 
   try {
     console.log('requesaction.cliendId', action);
@@ -705,18 +705,52 @@ export const UpcommingAppoinments = function* (action) {
   }
 };
 
-async function handleResponse(response) {
-  console.log('RES',response)
-  if (!response.ok) {
-    //console.log(response.status)
-    if(response.status == 401 || response.status == 403){
+
+
+
+export const creatTech = async body => {
+
+
+
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+
+
+  };
+
+  return fetch(apiPath + 'new-technicians/lock-down-mode', requestOptions).then(response => {
+    if (response.status == 401 || response.status == 403) {
       AsyncStorage.clear();
       RNRestart.Restart();
-    }else {
-      return await  Promise.reject(response);
+    } else return response.json();
+  }).catch((error) => {
+    if (error.message === 'Timeout' || error.message === 'Network request failed') {
+      return Promise.reject(error.message);
+    } else {
+      throw error;
     }
 
-  }else {
+  })
+};
+
+
+async function handleResponse(response) {
+  console.log('RES', response)
+  if (!response.ok) {
+    //console.log(response.status)
+    if (response.status == 401 || response.status == 403) {
+      AsyncStorage.clear();
+      RNRestart.Restart();
+    } else {
+      return await Promise.reject(response);
+    }
+
+  } else {
     return await response.json();
   }
 

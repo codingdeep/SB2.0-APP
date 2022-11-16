@@ -78,7 +78,6 @@ export const requestTokenDataApi = async (username, password) => {
               return response.json();
             })
             .then(user => {
-              console.log('USER',user)
 
                 user.csrfToken = auth.csrf.token;
                 user.token = auth.sessionId;

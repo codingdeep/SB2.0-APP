@@ -11,7 +11,7 @@ const MaskedInput = (props) => {
           style={{
               borderWidth:1,
               borderColor:error == true ? 'red' :'#ccc',
-              paddingVertical: 18,
+              paddingVertical: 10,
               marginTop:10,
               paddingHorizontal: 25
           }}
